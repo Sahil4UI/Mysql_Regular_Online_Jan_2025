@@ -1,0 +1,80 @@
+-- Operatos in MYSQL
+CREATE database mycompany; 
+
+show databases;
+
+use MyCOMPANY;
+
+-- MYSQL -  Case insensitive language 
+drop table products;
+create table products (
+product_id int auto_increment primary key,
+product_name text not null,
+price decimal(10,2) not null,
+stock int not null,
+category varchar(50)
+);
+
+insert into products (product_name,price,stock,category)
+values 
+('Smartphone',50000.00,20,'Electronics'),
+('Laptop',70000.00,15,'Electronics'),
+('T-Shirt',500.00,100,'Clothing'),
+('Table',1500.00,10,'Furniture'),
+('Headphones',2000.00,50,'Electronics'),
+('Shoes',15000.00,60,'Clothing'),
+('bed',15000.00,5,'Furniture');
+
+-- NEW YEAR -> price - discount- 10%
+select product_name,price,price-price*0.1 as "discount" from products;
+-- Arithmetic Operators : +,-,*,/,% -modulus - remainder
+
+select 22/7 ;
+
+select 21%7 ;
+
+
+-- select * from products where product_id%2=0;
+-- Comparison Operators -  = , >,<,<=,>= , !=(not equals) , <> 
+-- select * from products where product_id%2<>0;
+
+-- Logical Operators and nor not
+
+-- and - all conditions must be True then i will give True
+-- we have to find details of all products where price is greater than 500 and stock greator than 10;
+-- select * from products where price >500 and stock >10;
+-- not  -  reverse the Condition -> True->False,False-True
+select * from products where not price =500;
+
+-- Pattern Matching Operators - Like Operators - starts with , ends with contains
+-- wild card - % (anything),_
+
+select * from products where product_name like "%e" ;
+select * from products where product_name like "__a%" ; 
+
+-- Range Operator  - Between and Set Operators - IN
+-- select * from products where price between 1000 and 5000;
+
+-- select * from products where category in  ("Clothing","Furniture");
+
+-- Null Checking  
+
+-- insert into products (product_name,price,stock)
+-- values 
+-- ('Smartphone',10000.00,20),
+-- ('Laptop',20000.00,15);
+
+-- select * from products where category is not null;
+
+-- select * from products where category is null;
+
+-- Case 
+-- you have to find product name , price  ,  when price is greator than 5000 ,print "Expensive"
+-- else "Affordable"  
+select product_name , price ,
+CASE 
+	when price > 5000 then "Expensive"
+    else "Affordable"
+END AS price_category
+from products;
+
